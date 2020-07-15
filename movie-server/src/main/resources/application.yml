@@ -1,0 +1,28 @@
+server:
+  port: 8092
+
+
+spring:
+     application:
+         name: movie-server
+    datasource:
+     driver-class-name: com.mysql.cj.jdbc.Driver
+     url: jdbc:mysql://127.0.0.1:3306/mysqlday20?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai
+     username: root
+     password: 123456
+
+eureka:
+   client:
+     service-url:
+      defaultZone: http://localhost:8000/eureka/
+
+ mybatis:
+     type-aliases-package: cn.kgc.movie.common.entity
+
+ logging:
+    level:
+       cn.kgc.movie.server.mapper: debug
+
+
+page:
+  size: 8

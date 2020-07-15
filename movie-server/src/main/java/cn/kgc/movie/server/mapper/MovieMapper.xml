@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.movie.server.mapper.MovieMapper">
+    <resultMap id="MovieMap" type="movie">
+        <id column="movie_id" property="movie_id"></id>
+        <collection property="actors" column="movie_id" select="cn.kgc.movie.server.mapper.ActorMapper.selectActorByMovieId"></collection>
+        <collection property="types" column="movie_id" select="cn.kgc.movie.server.mapper"></collection>
+    </resultMap>
+
+    <select id="selectAllMovie" resultMap="MovieMap" parameterType="List">
+        select * from movie where movie_id in
+        <foreach collection="movie_ids" item="id" open="(" close=")" separator=",">
+            ${id}
+        </foreach>
+    </select>
+
+
+</mapper>

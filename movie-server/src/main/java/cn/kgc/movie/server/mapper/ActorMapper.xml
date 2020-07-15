@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.movie.server.mapper.ActorMapper">
+    <select id="selectActorByMovieId" parameterType="Integer" resultType="Actor">
+        select actor.actor_id , actor.actor_name from movie_actor , actor WHERE movie_actor.actor_id = actor.actor_id and movie_id = #{movie_id}
+    </select>
+</mapper>

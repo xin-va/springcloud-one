@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.store.server.mapper.ShowRoomMapper">
+
+    <resultMap id="showRoomMap" type="ShowRoom">
+        <id column="showroom_id" property="showroom_id"></id>
+        <association property="store" column="store_id" select="cn.kgc.store.server.mapper.StoreMapper.selectByStoreId"></association>
+    </resultMap>
+
+    <select id="selectShowRooms" resultType="ShowRoom" parameterType="Integer">
+        select * from showroom where store_id = #{store_id}
+    </select>
+
+    <select id="selectByShowRoomIds" parameterType="List" resultMap="showRoomMap">
+        select * from showroom where showroom_id in
+        <foreach collection="showroom_ids" open="(" close=")" separator="," item="id">
+            ${id}
+        </foreach>
+    </select>
+
+</mapper>

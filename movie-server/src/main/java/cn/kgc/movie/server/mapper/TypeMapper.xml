@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.movie.server.mapper.TypeMapper">
+    <select id="selectTypeByMovieId" parameterType="Integer" resultType="Type">
+             select type.type_id , type.type_name
+             from movie_type , type
+             where movie_type.type_id = type.type_id
+             and  movie_id= #{movie_id}
+    </select>
+</mapper>

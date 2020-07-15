@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.showmovie.server.mapper.ShowmovieMapper">
+    <resultMap id="ShowMovieMap" type="ShowMovie" >
+        <id column="movie_show_id" property="movie_show_id"></id>
+        <result column="show_date" property="show_date"></result>
+        <result column="price" property="price"></result>
+        <association property="movie" >
+            <id property="movie_id" column="movie_id"></id>
+        </association>
+        <association property="showRoom">
+            <id property="showroom_id" column="showroom_id"></id>
+        </association>
+    </resultMap>
+
+    <select id="selectAllShowMovie" parameterType="List" resultMap="ShowMovieMap">
+        select * from movie_show
+        <if test="showRoomIds==mull">
+            <foreach collection="showRoomIds" open="(" close=")" separator="," item="showroomId">
+                ${showroomId}
+            </foreach>
+        </if>
+    </select>
+    <select id="selectShowMovieInfo" parameterType="Integer" resultMap="ShowMovieMap">
+        select * from movie_show where movie_show_id = #{movie_show_id}
+    </select>
+</mapper>

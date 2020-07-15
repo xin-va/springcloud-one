@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kgc.order.server.mapper.OrderMapper">
+    <resultMap id="orderMap" type="Order">
+        <id property="order_id" column="order_id"></id>
+        <result property="seat_num" column="seat_num"></result>
+        <association property="showMovie">
+            <id column="movie_show_id" property="movie_show_id"></id>
+        </association>
+
+    </resultMap>
+    <insert id="addOneOrder" >
+       INSERT INTO `order`(`movie_show_id`, `user_id`, `seat_num`,`create_date`) VALUES (#{movie_show_id}, #{user_id}, #{seat_num},now())
+    </insert>
+    <select id="getOrderByMovie_show_id" resultType="Order">
+        select * from `order` where movie_show_id=#{movie_show_id}
+    </select>
+    <select id="getOrderByUserId" resultMap="orderMap">
+        select * from `order` where user_id = #{user_id}
+    </select>
+</mapper>
