@@ -6,6 +6,7 @@ package cn.kgc.project.common.entity;
  * 类描述   ：
  */
 public class Actor {
+    //演员id
     private Integer actor_id;
     private String actor_name;
 
